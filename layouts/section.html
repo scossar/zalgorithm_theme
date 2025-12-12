@@ -1,0 +1,10 @@
+{{ define "main" }}
+<h1 class="text-gray-900 dark:text-gray-100 text-3xl">{{ .Title }}</h1>
+{{ .Content }} {{ range .Pages }}
+<section class="prose dark:prose-invert">
+  <h2>
+    <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+  </h2>
+  {{ .Summary }}
+</section>
+{{ end }} {{ end }}

@@ -1,0 +1,20 @@
+<!doctype html>
+<html
+  lang="{{ site.Language.LanguageCode }}"
+  dir="{{ or site.Language.LanguageDirection `ltr` }}"
+>
+  <head>
+    {{ partial "head.html" . }}
+  </head>
+  <body class="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900">
+    <header class="text-gray-900 dark:text-gray-100">
+      <div class="max-w-4xl mx-auto">{{ partial "header.html" . }}</div>
+    </header>
+    <main class="mx-1 my-4 grow">
+      <div class="max-w-4xl mx-auto">{{ block "main" . }}{{ end }}</div>
+    </main>
+    <footer class="text-gray-900 dark:text-gray-100">
+      <div class="max-w-4xl mx-auto">{{ partial "footer.html" . }}</div>
+    </footer>
+  </body>
+</html>
