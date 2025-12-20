@@ -4,11 +4,35 @@ document.addEventListener("DOMContentLoaded", function () {
   const searchInput = document.getElementById("semantic-search");
 
   if (searchInput) {
-    searchInput.addEventListener("keydown", function (e) {
+    searchInput.addEventListener("keydown", async function (e) {
       if (e.key === "Enter") {
-        e.preventDefault(); // maybe
+        e.preventDefault();
         const query = e.target.value;
-        console.log("query", query);
+
+        const apiUrl = window.location.hostname === "localhost"
+          ? "http://localhost:8000/query"
+          : "https://api.zalgorithm.com/query";
+
+        try {
+          const response = await fetch(apiUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ query: query }),
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP error. status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          console.log("Search results:", data);
+
+          // call function to display results
+        } catch (error) {
+          console.error("Search failed:", error);
+        }
       }
     });
   }
