@@ -28,13 +28,15 @@ if (searchInput) {
 
         const data = await response.json();
         const results = data["results"];
+        console.log("results", results);
         const resultsContainer = document.getElementById("search-results");
 
         const formattedResults = results
           .map(
             (result) => `
-<div class="search-result my-2">
-${result.document}
+<div class="search-result">
+<h2>${result["metadata"].title}</h2>
+${result["metadata"].anchor_link}
 </div>
 `,
           )

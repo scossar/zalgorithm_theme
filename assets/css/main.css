@@ -1,3 +1,11 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @source "hugo_stats.json";
+
+.search-result {
+  @apply my-3;
+}
+
+.search-result h2 {
+  @apply text-2xl;
+}

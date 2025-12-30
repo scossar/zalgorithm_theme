@@ -5,5 +5,8 @@
   site.Title }}{{ end }}
 </title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-{{ partialCached "head/css.html" . }} {{ partialCached "head/js.html" . }} {{
-if.Param "math" }} {{ partialCached "math.html" . }} {{ end }}
+{{ partialCached "head/css.html" . }}
+<!-- {{ with (templates.Defer (dict "key" "global"))}} {{ partial "head/css.html"}} -->
+<!-- {{ end }} -->
+{{ partialCached "head/js.html" . }} {{ if.Param "math" }} {{ partialCached
+"math.html" . }} {{ end }}
