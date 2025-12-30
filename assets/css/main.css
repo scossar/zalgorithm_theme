@@ -2,10 +2,22 @@
 @plugin "@tailwindcss/typography";
 @source "hugo_stats.json";
 
-.search-result {
+#search-results {
   @apply my-3;
 }
 
-.search-result h2 {
-  @apply text-2xl;
+#search-results h1 a {
+  @apply text-3xl my-2;
+}
+
+#search-results h2 a {
+  @apply text-2xl my-2;
+}
+
+#search-results h3 a {
+  @apply text-xl my-2;
+}
+
+#search-results .article-fragment {
+  @apply my-2;
 }

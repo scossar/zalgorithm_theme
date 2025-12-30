@@ -1,16 +1,82 @@
 {{ define "main" }}
 <div class="my-1 text-gray-900 dark:text-gray-100">
-{{ .Content }}
+  {{ .Content }}
   <div>
     <span class="block font-bold">Search:</span>
-    <input type=text id="semantic-search" class="border border-gray-800
-                                                 dark:border-gray-50
-                                                 pl-2 pt-1 pb-1 pr-2
-                                                 w-full">
-    </input>
-    <div id="search-results">
-
-    </div>
+    <form hx-post="http://localhost:8000/query" hx-target="#search-results">
+      <input
+        type="text"
+        id="semantic-search"
+        name="query"
+        class="border border-gray-800 dark:border-gray-50 pl-2 pt-1 pb-1 pr-2 w-full"
+      />
+      <button
+        type="submit"
+        class="cursor-pointer border border-gray-800 p-2 mt-1"
+      >
+        Search
+      </button>
+    </form>
+    <div id="search-results"></div>
   </div>
 </div>
+
+<script>
+  const apiUrl =
+    window.location.hostname === "localhost"
+      ? "http://localhost:8000/query"
+      : "https://api.zalgorithm.com/query";
+
+  function loadSearchResults() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const query = urlParams.get("q");
+
+    if (query) {
+      document.getElementById("semantic-search").value = query;
+
+      if (history.state && history.state.results) {
+        console.log("getting results from history");
+        document.getElementById("search-results").innerHTML =
+          history.state.results;
+      } else {
+        const formData = new FormData();
+        formData.append("query", query);
+
+        fetch(apiUrl, {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => response.text())
+          .then((html) => {
+            document.getElementById("search-results").innerHTML = html;
+
+            history.replaceState(
+              { query: query, results: html },
+              "",
+              window.location.href,
+            );
+          });
+      }
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", loadSearchResults);
+  // handle back/forward navigation
+  window.addEventListener("popstate", loadSearchResults);
+
+  document.body.addEventListener("htmx:afterRequest", function (evt) {
+    const form = evt.detail.elt;
+    if (form.querySelector("#semantic-search")) {
+      const query = form.querySelector("#semantic-search").value;
+      if (query && evt.detail.successful) {
+        const results = document.getElementById("search-results").innerHTML;
+        history.pushState(
+          { query: query, results: results },
+          "",
+          "?q=" + encodeURIComponent(query),
+        );
+      }
+    }
+  });
+</script>
 {{ end }}
