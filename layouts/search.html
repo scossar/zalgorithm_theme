@@ -22,7 +22,7 @@
 </div>
 
 <script>
-  // TODO: maybe don't do this?
+  // I'm using a script for this instead of HTMX functionality because the API isn't on the blog's server
   const apiUrl =
     window.location.hostname === "localhost"
       ? "http://localhost:8000/query"
@@ -67,7 +67,6 @@
           .then((response) => response.text())
           .then((html) => {
             if (html.includes('class="katex"')) {
-              // test this
               loadKaTexCSS();
             }
             document.getElementById("search-results").innerHTML = html;
