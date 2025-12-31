@@ -1,4 +1,28 @@
+:root {
+  --bg: #fff;
+  --text: #000;
+  --text-light: #666;
+  --border: #ccc;
+  --link: #0066cc;
+  --link-visited: #551a8b;
+  --link-active: #c00;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1a1a1a;
+    --text: #e0e0e0;
+    --text-light: #999;
+    --border: #444;
+    --link: #6db3f2;
+    --link-visited: #b894d6;
+    --link-active: #ff6b6b;
+  }
+}
+
 body {
+  background-color: var(--bg);
+  color: var(--text);
   font-family:
     system-ui,
     -apple-system,
@@ -8,18 +32,42 @@ body {
     "Helvetica Neue",
     Arial,
     sans-serif;
-  max-width: 65ch;
-  margin: 0 auto;
-  padding: 0 1rem;
-  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-header {
+a {
+  color: var(--link);
+}
+
+a:visited {
+  color: var(--link-visited);
+}
+
+a:active {
+  color: var(--link-active);
+}
+
+header,
+main,
+footer {
+  max-width: 65ch;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+main {
+  flex: 1;
+}
+
+header .header-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid var(--border);
   padding: 0.75rem 0;
-  border-bottom: 1px solid #666;
 }
 
 header h1 {
@@ -27,21 +75,23 @@ header h1 {
   font-size: 1.5rem;
 }
 
-header h1 a {
-  color: inherit;
+header .header-content h1 a {
+  color: var(--text);
   text-decoration: none;
 }
 
-header h1 a:hover {
-  color: #666;
-}
-
-header > a {
+header .header-content a {
   text-decoration: none;
 }
 
-header > a:hover {
+header .header-content a:hover {
   text-decoration: underline;
+}
+
+footer .footer-content {
+  /* targeting the div so that font-size doesn't affect max-width */
+  font-size: 0.875em;
+  padding: 0.75rem 0;
 }
 
 code {
@@ -78,10 +128,20 @@ figure {
 figcaption,
 time {
   font-size: 0.875em;
-  color: #666;
+  color: var(--text-light);
 }
 
 figcaption {
   margin-top: 0.5rem;
   text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid var(--border);
+  padding: 0.5rem;
 }
