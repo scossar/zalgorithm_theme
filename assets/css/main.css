@@ -1,4 +1,6 @@
 @import "tailwindcss";
+/* TODO: remove */
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 @plugin "@tailwindcss/typography";
 @source "hugo_stats.json";
 
