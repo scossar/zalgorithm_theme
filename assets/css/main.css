@@ -1,25 +1,87 @@
-@import "tailwindcss";
-/* TODO: remove */
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
-@plugin "@tailwindcss/typography";
-@source "hugo_stats.json";
-
-#search-results {
-  @apply my-3;
+body {
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+  max-width: 65ch;
+  margin: 0 auto;
+  padding: 0 1rem;
+  line-height: 1.5;
 }
 
-#search-results h1 a {
-  @apply text-3xl my-2;
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #666;
 }
 
-#search-results h2 a {
-  @apply text-2xl my-2;
+header h1 {
+  margin: 0;
+  font-size: 1.5rem;
 }
 
-#search-results h3 a {
-  @apply text-xl my-2;
+header h1 a {
+  color: inherit;
+  text-decoration: none;
 }
 
-#search-results .article-fragment {
-  @apply my-2;
+header h1 a:hover {
+  color: #666;
+}
+
+header > a {
+  text-decoration: none;
+}
+
+header > a:hover {
+  text-decoration: underline;
+}
+
+code {
+  font-size: 0.875em;
+}
+
+.highlight pre code {
+  font-size: 1em;
+}
+
+code,
+pre {
+  font-family:
+    ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas,
+    "DejaVu Sans Mono", monospace;
+}
+
+.highlight pre {
+  padding: 0.75rem 1rem;
+  overflow-x: auto;
+  font-size: 0.875em;
+  line-height: 1.4;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+figure {
+  margin: 2rem 0;
+}
+
+figcaption,
+time {
+  font-size: 0.875em;
+  color: #666;
+}
+
+figcaption {
+  margin-top: 0.5rem;
+  text-align: center;
 }

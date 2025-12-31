@@ -2,20 +2,19 @@
 <html
   lang="{{ site.Language.LanguageCode }}"
   dir="{{ or site.Language.LanguageDirection `ltr` }}"
-  data-theme="dark"
 >
   <head>
     {{ partial "head.html" . }}
   </head>
-  <body class="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900">
-    <header class="text-gray-900 dark:text-gray-100">
-      <div class="max-w-4xl mx-auto">{{ partial "header.html" . }}</div>
+  <body>
+    <header>
+      {{ partial "header.html" . }}
     </header>
-    <main class="mx-1 my-4 grow">
-      <div class="max-w-4xl mx-auto">{{ block "main" . }}{{ end }}</div>
+    <main>
+      {{ block "main" . }}{{ end }}
     </main>
-    <footer class="text-gray-900 dark:text-gray-100">
-      <div class="max-w-4xl mx-auto">{{ partial "footer.html" . }}</div>
+    <footer>
+      {{ partial "footer.html" . }}
     </footer>
   </body>
 </html>
