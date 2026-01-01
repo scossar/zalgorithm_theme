@@ -153,3 +153,20 @@ td {
   border: 1px solid var(--border);
   padding: 0.5rem;
 }
+
+#full-page-search input#semantic-search {
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+button.submit-search {
+  cursor: pointer;
+}
+
+#search-results h2 {
+  font-size: 1.17em; /* default font-size of h3 elements */
+}
+
+#search-results .article-fragment {
+  border-bottom: 1px solid var(--border);
+}

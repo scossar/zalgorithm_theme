@@ -1,11 +1,11 @@
 {{ define "main" }}
 <div>
   {{ .Content }}
-  <div>
+  <div id="full-page-search">
     <span>Search:</span>
     <form hx-post="http://localhost:8000/query" hx-target="#search-results">
       <input type="text" id="semantic-search" name="query" />
-      <button type="submit">Search</button>
+      <button class="submit-search" type="submit">Search</button>
     </form>
     <div id="search-results"></div>
   </div>
