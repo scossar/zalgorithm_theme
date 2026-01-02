@@ -27,6 +27,30 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 100%;
+  line-height: 1.4;
+}
+
+h1 {
+  font-size: 2rem;
+}
+h2 {
+  font-size: 1.5rem;
+}
+h3 {
+  font-size: 1.17rem;
+}
+h4 {
+  font-size: 1rem;
+}
+h5 {
+  font-size: 0.83rem;
+}
+h6 {
+  font-size: 0.67rem;
+}
+
 body {
   background-color: var(--bg);
   color: var(--text);
@@ -97,17 +121,8 @@ header .header-content a:hover {
 }
 
 footer .footer-content {
-  /* targeting the div so that font-size doesn't affect max-width */
-  font-size: 0.875em;
+  font-size: 0.875rem;
   padding: 0.75rem 0;
-}
-
-code {
-  font-size: 0.875em;
-}
-
-.highlight pre code {
-  font-size: 1em;
 }
 
 code,
@@ -117,12 +132,18 @@ pre {
     "DejaVu Sans Mono", monospace;
 }
 
+code {
+  font-size: 0.875rem;
+}
+
 .highlight pre {
   padding: 0.75rem 1rem;
   overflow-x: auto;
-  font-size: 0.875em;
-  line-height: 1.4;
   border-radius: 4px;
+}
+
+.highlight pre code {
+  line-height: 1.3;
 }
 
 img {
@@ -136,7 +157,7 @@ figure {
 
 figcaption,
 time {
-  font-size: 0.875em;
+  font-size: 0.875rem;
   color: var(--text-light);
 }
 
@@ -165,7 +186,7 @@ button.submit-search {
 }
 
 #search-results h2 {
-  font-size: 1.17em; /* default font-size of h3 elements */
+  font-size: 1.17rem;
 }
 
 #search-results .article-fragment {
