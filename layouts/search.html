@@ -3,7 +3,7 @@
   {{ .Content }}
   <div id="full-page-search">
     <span>Search:</span>
-    <form hx-post="http://localhost:8000/query" hx-target="#search-results">
+    <form hx-post="{{ .Site.Params.apiUrl }}/query" hx-target="#search-results">
       <input type="text" id="semantic-search" name="query" />
       <button class="submit-search" type="submit">Search</button>
     </form>
@@ -12,11 +12,11 @@
 </div>
 
 <script>
-  // I'm using a script for this instead of HTMX functionality because the API isn't on the blog's server
+  // TODO: improve this:
   const apiUrl =
     window.location.hostname === "localhost"
       ? "http://localhost:8000/query"
-      : "https://api.zalgorithm.com/query";
+      : "/query";
 
   function loadKaTexCSS() {
     if (document.getElementById("katex-css")) return;
@@ -39,7 +39,6 @@
       document.getElementById("semantic-search").value = query;
 
       // conditionally load katex-css
-      // TODO: confirm this and conditional loading in fetch call below
       if (history.state && history.state.results) {
         if (history.state.results.includes('class="katex"')) {
           loadKaTexCSS();
