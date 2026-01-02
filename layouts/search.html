@@ -1,0 +1,92 @@
+{{ define "main" }}
+<div>
+  {{ .Content }}
+  <div id="full-page-search">
+    <span>Search:</span>
+    <form hx-post="{{ .Site.Params.apiUrl }}/query" hx-target="#search-results">
+      <input type="text" id="semantic-search" name="query" />
+      <button class="submit-search" type="submit">Search</button>
+    </form>
+    <div id="search-results"></div>
+  </div>
+</div>
+
+<script>
+  // TODO: improve this:
+  const apiUrl =
+    window.location.hostname === "localhost"
+      ? "http://localhost:8000/query"
+      : "/query";
+
+  function loadKaTexCSS() {
+    if (document.getElementById("katex-css")) return;
+
+    const link = document.createElement("link");
+    link.id = "katex-css";
+    link.rel = "stylesheet";
+    link.href = "https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css";
+    link.integrity =
+      "sha384-WcoG4HRXMzYzfCgiyfrySxx90XSl2rxY5mnVY5TwtWE6KLrArNKn0T/mOgNL0Mmi";
+    link.crossOrigin = "anonymous";
+    document.head.appendChild(link);
+  }
+
+  function loadSearchResults() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const query = urlParams.get("q");
+
+    if (query) {
+      document.getElementById("semantic-search").value = query;
+
+      // conditionally load katex-css
+      if (history.state && history.state.results) {
+        if (history.state.results.includes('class="katex"')) {
+          loadKaTexCSS();
+        }
+        document.getElementById("search-results").innerHTML =
+          history.state.results;
+      } else {
+        const formData = new FormData();
+        formData.append("query", query);
+
+        fetch(apiUrl, {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => response.text())
+          .then((html) => {
+            if (html.includes('class="katex"')) {
+              loadKaTexCSS();
+            }
+            document.getElementById("search-results").innerHTML = html;
+
+            history.replaceState(
+              { query: query, results: html },
+              "",
+              window.location.href,
+            );
+          });
+      }
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", loadSearchResults);
+  // handle back/forward navigation
+  window.addEventListener("popstate", loadSearchResults);
+
+  document.body.addEventListener("htmx:afterRequest", function (evt) {
+    const form = evt.detail.elt;
+    if (form.querySelector("#semantic-search")) {
+      const query = form.querySelector("#semantic-search").value;
+      if (query && evt.detail.successful) {
+        const results = document.getElementById("search-results").innerHTML;
+        history.pushState(
+          { query: query, results: results },
+          "",
+          "?q=" + encodeURIComponent(query),
+        );
+      }
+    }
+  });
+</script>
+{{ end }}

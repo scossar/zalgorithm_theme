@@ -1,3 +1,173 @@
-@import "tailwindcss";
-@plugin "@tailwindcss/typography";
-@source "hugo_stats.json";
+:root {
+  --bg: #fff;
+  --text: #000;
+  --text-light: #666;
+  --border: #ccc;
+  --link: #0066cc;
+  --link-visited: #551a8b;
+  --link-active: #c00;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1a1a1a;
+    --text: #e0e0e0;
+    --text-light: #999;
+    --border: #444;
+    --link: #6db3f2;
+    --link-visited: #b894d6;
+    --link-active: #ff6b6b;
+  }
+}
+
+/* because I got totally tripped up on this */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: var(--link);
+  overflow-wrap: break-word;
+}
+
+a:visited {
+  color: var(--link-visited);
+}
+
+a:active {
+  color: var(--link-active);
+}
+
+header,
+main,
+footer {
+  max-width: 65ch;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+main {
+  flex: 1;
+}
+
+header .header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  padding: 0.75rem 0;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+header .header-content h1 a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+header .header-content a {
+  text-decoration: none;
+}
+
+header .header-content a:hover {
+  text-decoration: underline;
+}
+
+footer .footer-content {
+  /* targeting the div so that font-size doesn't affect max-width */
+  font-size: 0.875em;
+  padding: 0.75rem 0;
+}
+
+code {
+  font-size: 0.875em;
+}
+
+.highlight pre code {
+  font-size: 1em;
+}
+
+code,
+pre {
+  font-family:
+    ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas,
+    "DejaVu Sans Mono", monospace;
+}
+
+.highlight pre {
+  padding: 0.75rem 1rem;
+  overflow-x: auto;
+  font-size: 0.875em;
+  line-height: 1.4;
+  border-radius: 4px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+figure {
+  margin: 2rem 0;
+}
+
+figcaption,
+time {
+  font-size: 0.875em;
+  color: var(--text-light);
+}
+
+figcaption {
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid var(--border);
+  padding: 0.5rem;
+}
+
+#full-page-search input#semantic-search {
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+button.submit-search {
+  cursor: pointer;
+}
+
+#search-results h2 {
+  font-size: 1.17em; /* default font-size of h3 elements */
+}
+
+#search-results .article-fragment {
+  border-bottom: 1px solid var(--border);
+}

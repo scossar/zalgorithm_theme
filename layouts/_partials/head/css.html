@@ -1,12 +1,11 @@
-{{ with resources.Get "css/main.css" }}
-  {{ $opts := dict "minify" (not hugo.IsDevelopment) }}
-  {{ with . | css.TailwindCSS $opts }}
-    {{ if hugo.IsDevelopment }}
-      <link rel="stylesheet" href="{{ .RelPermalink }}">
-    {{ else }}
-      {{ with . | fingerprint }}
-        <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
-      {{ end }}
-    {{ end }}
-  {{ end }}
+{{- $cssFiles := slice
+  (resources.Get "css/normalize.css")
+  (resources.Get "css/main.css")
+}}
+{{ if hugo.IsDevelopment }}
+  {{- $bundled := $cssFiles | resources.Concat "css/bundle.css"}}
+  <link rel="stylesheet" href="{{ $bundled.RelPermalink }}">
+{{ else }}
+  {{- $bundled := $cssFiles | resources.Concat "css/bundle.css" | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $bundled.RelPermalink}}" integrity="{{ $bundled.Data.Integrity }}" crossorigin="anonymous">
 {{ end }}
