@@ -46,6 +46,7 @@ body {
 
 a {
   color: var(--link);
+  overflow-wrap: break-word;
 }
 
 a:visited {
