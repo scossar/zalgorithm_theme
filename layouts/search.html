@@ -2,10 +2,10 @@
 <div>
   {{ .Content }}
   <div id="full-page-search">
-    <span>Search:</span>
+    <span class="search-form-title">Search query:</span>
     <form hx-post="{{ .Site.Params.apiUrl }}/query" hx-target="#search-results">
       <input type="text" id="semantic-search" name="query" />
-      <button class="submit-search" type="submit">Search</button>
+      <button class="submit-search" type="submit">Submit</button>
     </form>
     <div id="search-results"></div>
   </div>

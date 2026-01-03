@@ -188,6 +188,14 @@ td {
   padding: 0.5rem;
 }
 
+#full-page-search {
+  margin-top: 1rem;
+}
+
+.search-form-title {
+  font-weight: bold;
+}
+
 #full-page-search input#semantic-search {
   width: 100%;
   margin-bottom: 0.5rem;
