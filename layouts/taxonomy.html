@@ -1,5 +1,9 @@
 {{ define "main" }}
-<h1>{{ .Title }}</h1>
-{{ .Content }} {{ range .Pages }}
-<h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-{{ end }} {{ end }}
+  <h1>{{ .Title }}</h1>
+  <div class="tags">
+    {{ .Content }}
+    {{ range .Data.Terms.ByCount }}
+      <h2><a href="{{ .Page.RelPermalink }}">{{ .Page.Name }} ({{ .Count }})</a></h2>
+    {{ end }}
+  </div>
+{{ end }}

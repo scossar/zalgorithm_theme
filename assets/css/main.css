@@ -201,8 +201,22 @@ td {
   margin-bottom: 0.5rem;
 }
 
-#search-results h2 {
+#search-results h2,
+.tags h2,
+.tags-tag h2 {
   font-size: 1.17rem;
+}
+
+.tags h2 {
+  display: inline-block;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+.tags h2 a {
+  text-decoration: none;
 }
 
 #search-results .article-fragment {
