@@ -184,17 +184,6 @@ either of these shortcodes in conjunction with this render hook.
     {{- end }}
   {{- end -}}
 >{{ .Text }}</a>
-{{- if .Page.Params.infolinks }}
-  {{ $rel := $attrs.rel }}
-  {{- if not $rel }}
-    {{ $fragmentsMap := site.Data.fragments.sections }}
-    {{ $url := $attrs.href }}
-    {{ $fragmentData := index $fragmentsMap $url}}
-    {{- if $fragmentData }}
-      <button class="infolink" data-fragment-id="{{$fragmentData.db_id}}">?</button>
-    {{- end }}
-  {{- end }}
-{{- end }}
 
 {{- define "_partials/inline/h-rh-l/validate-fragment.html" }}
   {{- /*

@@ -259,3 +259,8 @@ sup a::before {
 sup a::after {
   content: "]";
 }
+
+button.infolink {
+  padding: 0.125rem 0.25rem;
+  margin-right: 0.125rem;
+}
