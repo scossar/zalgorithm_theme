@@ -1,0 +1,8 @@
+<a
+  {{- with .Title }} title="{{ . }}" {{- end -}}
+  {{- range $k, $v := .attrs }}
+    {{- if $v }}
+      {{- printf " %s=%q" $k ($v | transform.HTMLEscape) | safeHTMLAttr }}
+    {{- end }}
+  {{- end -}}
+>{{ .Text }}</a>

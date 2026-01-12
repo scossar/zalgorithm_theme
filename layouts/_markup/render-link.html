@@ -174,49 +174,24 @@ either of these shortcodes in conjunction with this render hook.
     {{- end }}
   {{- end }}
 {{- end }}
+
 {{- /* Render anchor element. */ -}}
-{{ partial "markup/link.html" }}
-<a
-  {{- with .Title }} title="{{ . }}" {{- end -}}
-  {{- range $k, $v := $attrs }}
-    {{- if $v }}
-      {{- printf " %s=%q" $k ($v | transform.HTMLEscape) | safeHTMLAttr }}
-    {{- end }}
-  {{- end -}}
->{{ .Text }}</a>
-{{- if .Page.Params.infolinks }}
-  {{ $rel := $attrs.rel }}
-  {{- if not $rel }}
-    {{ $fragmentsMap := site.Data.fragments.sections }}
-    {{ $url := $attrs.href }}
-    {{ $fragmentData := index $fragmentsMap $url }}
-    {{- if $fragmentData }}
-      {{ $dbId := $fragmentData.db_id }}
-      {{ $apiUrl := site.Params.apiUrl }}
-      {{ $uniqueId := printf "%v-%v" $dbId (now.UnixMilli) }}
-      <button class="infolink"
-              id="infolink-{{ $uniqueId }}"
-              hx-get="{{ $apiUrl }}/fragment/{{ $dbId }}"
-              hx-trigger="click once"
-              hx-indicator="#loading-indicator-{{ $uniqueId }}"
-              hx-target="#fragment-display-{{ $uniqueId }}"
-              hx-on::after-request="
-              const display = document.getElementById('fragment-display-{{ $uniqueId }}');
-              display.classList.toggle('hidden');
-              this.textContent = '▲';
-              this.onclick = function() {
-              display.classList.toggle('hidden');
-              this.textContent = display.classList.contains('hidden') ? '▼' : '▲';
-             };
-             ">▼
-      </button>
-      <span class="htmx-indicator" id="loading-indicator-{{ $uniqueId }}">
-        <img  src="/images/tail-spin.svg" alt="Loading...">
-      </span>
-      <span id="fragment-display-{{ $uniqueId}}" class="infolink-display hidden"></span>
-    {{- end }}
-  {{- end }}
+{{- $ctx := dict
+  "Page" .Page
+  "attrs" $attrs
+  "Title" .Title
+  "Text" .Text
+  "Destination" .Destination
+}}
+{{- if eq hugo.Environment "minimal" }}
+  {{- partial "render-hooks/link-default.html" $ctx }}
+{{- else if .Page.Params.infolinks }}
+  {{- partial "render-hooks/link-infolink.html" $ctx }}
+{{- else }}
+  {{- partial "render-hooks/link-default.html" $ctx }}
 {{- end }}
+
+
 
 {{- define "_partials/inline/h-rh-l/validate-fragment.html" }}
   {{- /*
