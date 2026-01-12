@@ -174,8 +174,8 @@ either of these shortcodes in conjunction with this render hook.
     {{- end }}
   {{- end }}
 {{- end }}
-
 {{- /* Render anchor element. */ -}}
+{{ partial "markup/link.html" }}
 <a
   {{- with .Title }} title="{{ . }}" {{- end -}}
   {{- range $k, $v := $attrs }}

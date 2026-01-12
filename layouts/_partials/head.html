@@ -4,8 +4,11 @@
   <meta name="htmx-config" content='{"selfRequestsOnly": false}' />
 {{- end }}
 <title>
-  {{ if .IsHome }} {{ site.Title }}{{ else }}{{ printf "%s | %s" .Title
-  site.Title }} {{ end }}
+  {{ if .IsHome }}
+    {{ site.Title }}
+  {{ else }}
+    {{ printf "%s | %s" .Title site.Title }}
+  {{ end }}
 </title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 {{ partialCached "head/css.html" . }}
