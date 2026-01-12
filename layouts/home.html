@@ -1,10 +1,12 @@
-{{ define "main"}} {{ .Content }}
-<h2>Posts</h2>
-{{ range where site.RegularPages "Type" "posts"}}
-<section>
-  <h3>
-    <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
-  </h3>
-  <span>{{ .Summary }}</span>
-</section>
-{{end}} {{ end }}
+{{ define "main"}}
+{{ .Content }}
+  <h2>Posts</h2>
+  {{ range where site.RegularPages "Type" "posts"}}
+    <section>
+      <h3>
+        <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+      </h3>
+      <span>{{ .Summary }}</span>
+    </section>
+  {{end}}
+{{ end }}

@@ -1,11 +1,11 @@
 {{ define "main" }}
-<div>
-  <h1>{{ .Title }}</h1>
-  <div class="tags-tag">
-  {{ .Content }}
-  {{ range .Pages }}
-    <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-  {{ end }}
-</div>
+  <div>
+    <h1>{{ .Title }}</h1>
+    <div class="tags-tag">
+      {{ .Content }}
+      {{ range .Pages }}
+        <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+      {{ end }}
+    </div>
   </div>
 {{ end }}
