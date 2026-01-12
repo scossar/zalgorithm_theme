@@ -6,6 +6,7 @@
   --link: #0066cc;
   --link-visited: #551a8b;
   --link-active: #c00;
+  --fragment-bg: #fffef8;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,6 +18,7 @@
     --link: #6db3f2;
     --link-visited: #b894d6;
     --link-active: #ff6b6b;
+    --fragment-bg: #1f1f1a;
   }
 }
 
@@ -261,6 +263,50 @@ sup a::after {
 }
 
 button.infolink {
-  padding: 0.125rem 0.25rem;
-  margin-right: 0.125rem;
+  /* padding: 0.125rem 0.25rem; */
+  /* margin-right: 0.125rem; */
+  background: var(--bg);
+  color: var(--text-light);
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.infolink-display {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background: var(--fragment-bg);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  .infolink-display {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.infolink-display h2 {
+  font-size: 1.17rem;
+}
+
+.infolink-display.hidden {
+  display: none;
+}
+
+.htmx-indicator {
+  display: none;
+}
+
+.htmx-request .htmx-indicator {
+  display: block;
+}
+
+.htmx-request.htmx-indicator {
+  display: block;
 }
