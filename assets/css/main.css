@@ -18,7 +18,8 @@
     --link: #6db3f2;
     --link-visited: #b894d6;
     --link-active: #ff6b6b;
-    --fragment-bg: #1f1f1a;
+    /* --fragment-bg: #1f1f1a; */
+    --fragment-bg: #252520;
   }
 }
 
@@ -267,11 +268,9 @@ sup a::after {
   content: "]";
 }
 
-button.infolink {
-  /* padding: 0.125rem 0.25rem; */
-  /* margin-right: 0.125rem; */
+button .infolink {
   background: var(--bg);
-  color: var(--text-light);
+  color: var(--text);
   border: none;
   padding: 0;
   margin: 0;
@@ -279,7 +278,9 @@ button.infolink {
 
 .transclusion-container button {
   background: var(--fragment-bg);
+  color: var(--text-light);
   float: right;
+  margin-left: 1rem;
 }
 
 .transclusion-container button:hover {
@@ -303,7 +304,9 @@ button.infolink {
 @media (prefers-color-scheme: dark) {
   .infolink-display,
   .transclusion-container {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    box-shadow:
+      0 2px 12px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.05); /* Added subtle border */
   }
 }
 

@@ -3,7 +3,7 @@
   {{ .Content }}
   <div id="full-page-search">
     <span class="search-form-title">Search query:</span>
-    <form hx-post="{{ .Site.Params.apiUrl }}/query" hx-target="#search-results">
+    <form hx-post="{{ .Site.Params.apiUrl }}/api/query" hx-target="#search-results">
       <input type="text" id="semantic-search" name="query" />
       <button class="submit-search" type="submit">Submit</button>
     </form>
@@ -15,8 +15,8 @@
   // TODO: improve this:
   const apiUrl =
     window.location.hostname === "localhost"
-      ? "http://localhost:8000/query"
-      : "/query";
+      ? "http://localhost:8000/api/query"
+      : "/api/query";
 
   function loadKaTexCSS() {
     if (document.getElementById("katex-css")) return;

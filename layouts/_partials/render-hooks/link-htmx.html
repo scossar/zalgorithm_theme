@@ -7,7 +7,7 @@
 @context {int} dbId The fragment database id
 */}}
 
-{{ $uniqueId := printf "%v-%v" .dbId (now.UnixMilli) }}
+{{ $uniqueId := printf "%v-%d" .dbId (math.Counter) }}
 {{ $target := printf "transclusion-container-%v" $uniqueId }}
 {{ $apiUrl := site.Params.apiUrl }}
 <a
@@ -17,7 +17,7 @@
       {{- printf " %s=%q" $k ($v | transform.HTMLEscape) | safeHTMLAttr }}
     {{- end }}
   {{- end -}}
-  hx-get="{{ $apiUrl }}/fragment/{{ .dbId }}"
+  hx-get="{{ $apiUrl }}/api/fragment/{{ .dbId }}"
   hx-target="#{{ $target }}"
   hx-trigger="click once"
   hx-on::after-request="
@@ -28,7 +28,7 @@
   };
   "
 >{{ .Text }}</a>
-<section id="{{ $target }}" class="transclusion-container hidden"></section>
+<span id="{{ $target }}" class="transclusion-container hidden"></span>
 
 
 
