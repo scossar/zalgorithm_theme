@@ -84,6 +84,11 @@ a:active {
   color: var(--link-active);
 }
 
+a[rel="external"]::after {
+  content: " ↗";
+  font-size: 0.875em;
+  vertical-align: super;
+}
 button {
   font-size: 1rem;
   padding: 0.5em 1em; /* em units for button padding, so button-large {font-size:1.5rem}  would have scaled padding */
@@ -272,7 +277,17 @@ button.infolink {
   margin: 0;
 }
 
-.infolink-display {
+.transclusion-container button {
+  background: var(--fragment-bg);
+  float: right;
+}
+
+.transclusion-container button:hover {
+  background: var(--bg);
+}
+
+.infolink-display,
+.transclusion-container {
   display: block;
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -286,16 +301,18 @@ button.infolink {
 }
 
 @media (prefers-color-scheme: dark) {
-  .infolink-display {
+  .infolink-display,
+  .transclusion-container {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   }
 }
 
-.infolink-display h2 {
+.infolink-display h2,
+.transclusion-container h2 {
   font-size: 1.17rem;
 }
 
-.infolink-display.hidden {
+.hidden {
   display: none;
 }
 

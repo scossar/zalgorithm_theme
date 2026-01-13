@@ -1,0 +1,34 @@
+{{- /*
+@context {map} attrs href[string] rel[external|nul]
+@context {string} Destination The same as attrs.href
+@context {page} Page The page containing the link
+@context {string} Title The link title
+@context {string} Text The link text
+@context {int} dbId The fragment database id
+*/}}
+
+{{ $uniqueId := printf "%v-%v" .dbId (now.UnixMilli) }}
+{{ $target := printf "transclusion-container-%v" $uniqueId }}
+{{ $apiUrl := site.Params.apiUrl }}
+<a
+  {{- with .Title }} title="{{ . }}" {{- end -}}
+  {{- range $k, $v := .attrs }}
+    {{- if $v }}
+      {{- printf " %s=%q" $k ($v | transform.HTMLEscape) | safeHTMLAttr }}
+    {{- end }}
+  {{- end -}}
+  hx-get="{{ $apiUrl }}/fragment/{{ .dbId }}"
+  hx-target="#{{ $target }}"
+  hx-trigger="click once"
+  hx-on::after-request="
+  const target = document.getElementById('{{ $target }}');
+  target.classList.remove('hidden');
+  this.onclick = function() {
+    target.classList.remove('hidden');
+  };
+  "
+>{{ .Text }}</a>
+<section id="{{ $target }}" class="transclusion-container hidden"></section>
+
+
+

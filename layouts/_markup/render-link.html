@@ -183,10 +183,36 @@ either of these shortcodes in conjunction with this render hook.
   "Text" .Text
   "Destination" .Destination
 }}
-{{- if eq hugo.Environment "minimal" }}
+
+{{ $rel := $attrs.rel }}
+
+{{/* Try to get dbId if conditions are met */}}
+{{ $dbId := "" }}
+{{- if and (not $rel) (or .Page.Params.infolinks .Page.Params.htmxlinks) }}
+  {{ $fragmentsMap := site.Data.fragments.sections }}
+  {{ $url := $attrs.href }}
+  {{ $fragmentData := index $fragmentsMap $url }}
+  {{ $dbId = $fragmentData.db_id }}
+{{- end }}
+
+{{- if $dbId }}
+  {{- $ctx = merge $ctx (dict "dbId" $dbId) }}
+{{- end }}
+
+{{- if or (eq hugo.Environment "minimal") (and $rel (ne $rel "")) }}
   {{- partial "render-hooks/link-default.html" $ctx }}
 {{- else if .Page.Params.infolinks }}
-  {{- partial "render-hooks/link-infolink.html" $ctx }}
+  {{- if $dbId }}
+    {{- partial "render-hooks/link-infolink.html" $ctx }}
+  {{- else }}
+    {{- partial "render-hooks/link-default.html" $ctx }}
+  {{- end }}
+{{- else if .Page.Params.htmxlinks }}
+  {{- if $dbId }}
+    {{- partial "render-hooks/link-htmx.html" $ctx }}
+  {{- else }}
+    {{- partial "render-hooks/link-default.html" $ctx }}
+  {{- end }}
 {{- else }}
   {{- partial "render-hooks/link-default.html" $ctx }}
 {{- end }}
