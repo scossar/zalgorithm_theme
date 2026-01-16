@@ -1,0 +1,21 @@
+{{ $src := .Get "src" }}
+{{ $caption := .Get "caption" }}
+{{ $srcurl := .Get "src_url" }}
+<figure>
+  <video controls width="100%">
+    <source src="{{ $src }}.webm" type="video/webm" />
+    <source src="{{ $src }}.mp4" type="video/mp4" />
+    <p>
+      Your browser doesn't support HTML video. Here is a
+      <a href="{{ $src }}.mp4" download="{{ $src }}.mp4">link to download the video</a> instead.
+    </p>
+  </video>
+  {{ with $caption }}
+    <figcaption>
+    {{ . }}
+    {{ with $srcurl }}<br>
+    <a href="{{ . }}">{{ . }}</a>
+    {{- end }}
+   </figcaption>
+  {{ end }}
+</figure>

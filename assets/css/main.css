@@ -90,6 +90,11 @@ a[rel="external"]::after {
   font-size: 0.875em;
   vertical-align: super;
 }
+
+/* todo */
+blockquote {
+}
+
 button {
   font-size: 1rem;
   padding: 0.5em 1em; /* em units for button padding, so button-large {font-size:1.5rem}  would have scaled padding */
