@@ -4,7 +4,7 @@
     {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
     {{ $dateHuman := .Date | time.Format ":date_long" }}
     <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
-    {{ if .Params.not_a_math_tutorial }}
+    {{ if and .Params.not_a_math_tutorial (ne hugo.Environment "minimal") }}
       {{ partial "not_a_math_tutorial.html" . }}
     {{ end }}
     {{ .Content }}
