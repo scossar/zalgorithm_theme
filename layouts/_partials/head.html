@@ -3,6 +3,7 @@
 {{- if hugo.IsDevelopment }}
   <meta name="htmx-config" content='{"selfRequestsOnly": false}' />
 {{- end }}
+{{ partial "opengraph.html" . }}
 <title>
   {{ if .IsHome }}
     {{ site.Title }}
