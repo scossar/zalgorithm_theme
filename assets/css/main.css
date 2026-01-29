@@ -2,6 +2,7 @@
   --bg: #fff;
   --text: #000;
   --text-light: #666;
+  --text-verylight: #aaa;
   --border: #ccc;
   --link: #0066cc;
   --link-visited: #551a8b;
@@ -19,6 +20,7 @@
     --bg: #1a1a1a;
     --text: #e0e0e0;
     --text-light: #999;
+    --text-verylight: #888;
     --border: #444;
     --link: #6db3f2;
     --link-visited: #b894d6;
@@ -98,6 +100,11 @@ a[rel="external"]::after {
   content: " ↗";
   font-size: 0.875em;
   vertical-align: super;
+}
+
+a.anchor {
+  color: var(--text-verylight);
+  text-decoration: none;
 }
 
 blockquote {
