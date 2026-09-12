@@ -199,7 +199,7 @@ either of these shortcodes in conjunction with this render hook.
   {{- $ctx = merge $ctx (dict "dbId" $dbId) }}
 {{- end }}
 
-{{- if or (eq hugo.Environment "minimal") (and $rel (ne $rel "")) }}
+{{- if or (not (eq .Page.Params.htmx_link true)) (eq hugo.Environment "minimal") (and $rel (ne $rel "")) }}
   {{- partial "render-hooks/link-default.html" $ctx }}
 {{- else }}
   {{- if $dbId }}
